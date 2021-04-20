@@ -11,7 +11,7 @@ namespace project_pizzabox.Client
     public class Program
     {
         private static readonly StoreSingletons _storeSingleton = StoreSingletons.Instance;
-        private static void Run()
+        private static void Main()
         {
             //List<string> stores = new List<string>{"Store 001", "Store 002", "Store 003"}; // explicit
             var stores = new List<AStore> { new NewYorkStore(), new ChicagoStore() }; // datatype inference

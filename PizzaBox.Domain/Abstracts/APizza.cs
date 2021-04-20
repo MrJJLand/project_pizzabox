@@ -1,19 +1,23 @@
-using System;
+using System.Text;
 using PizzaBox.Domain.Models;
+using System;
 
 namespace PizzaBox.Domain.Abstracts
 {
-    public class APizza
+    public abstract class APizza : AModel
     {
 
-        const int top_max = 5, top_min = 2;
-        double crust_price = 0.0, size_price = 0.0, toppings_price = 0.0;
+        protected const int top_max = 5, top_min = 2;
+        protected double crust_price = 0.0, size_price = 0.0, toppings_price = 0.0;
         //double price = crust_price + size_price + toppings_price;
-        public string name { get; protected set; }
+        protected string name { get; set; }
+        protected double price { get; set; }
 
-        public double price { get; protected set; }
+        protected APizza()
+        {
+            Factory();
 
-        public Size size { get; protected set; }
+        }
 
         protected virtual void Factory()
         {
@@ -24,7 +28,7 @@ namespace PizzaBox.Domain.Abstracts
 
         protected virtual void AddCrust()
         {
-
+            Console.WriteLine("Choose a Crust type you would like:\n1)");
         }
 
         protected virtual void AddSize()
@@ -36,5 +40,18 @@ namespace PizzaBox.Domain.Abstracts
         {
 
         }
+
+        // public override string ToString()
+        // {
+        //     var stringBuilder = new StringBuilder();
+        //     var separator = ", ";
+
+        //     foreach (var item in Topping)
+        //     {
+        //         stringBuilder.Append($"{item}{separator}");
+        //     }
+        //     return $"{Crust} - {Size} - {stringBuilder.ToString().TrimEnd(separator.ToCharArray())}";
+        // }
+
     }
 }
