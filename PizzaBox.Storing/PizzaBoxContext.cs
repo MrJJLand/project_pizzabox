@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Storing
 {
@@ -9,9 +12,13 @@ namespace PizzaBox.Storing
         public DbSet<AStore> Stores { get; set; } //implicit serialization, implicit casting
         public DbSet<APizza> Pizzas { get; set; }
 
-        public PizzaBoxContext(IConfiguration configuration)
+        public DbSet<Customer> Customers { get; set; }
+
+
+
+        public PizzaBoxContext()
         {
-            _configuration = configuration;
+            _configuration = new ConfigurationBuilder().AddUserSecrets<PizzaBoxContext>().Build();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
@@ -22,6 +29,11 @@ namespace PizzaBox.Storing
         {
             builder.Entity<AStore>().HasKey(e => e.EntityID);
             builder.Entity<APizza>().HasKey(e => e.EntityID);
+            builder.Entity<Crust>().HasKey(e => e.EntityID);
+            builder.Entity<Size>().HasKey(e => e.EntityID);
+            builder.Entity<Topping>().HasKey(e => e.EntityID);
+            builder.Entity<Customer>().HasKey(e => e.EntityID);
+            builder.Entity<Order>().HasKey(e => e.EntityID);
         }
     }
 }

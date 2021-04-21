@@ -15,8 +15,7 @@ namespace PizzaBox.Domain.Abstracts
 
         protected APizza()
         {
-            Factory();
-
+            //Factory();
         }
 
         protected virtual void Factory()

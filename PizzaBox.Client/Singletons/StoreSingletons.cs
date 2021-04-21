@@ -5,7 +5,6 @@ using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client.Singletons
 {
-
     public class StoreSingletons
     {
         private const string _path = @"data/store.xml";

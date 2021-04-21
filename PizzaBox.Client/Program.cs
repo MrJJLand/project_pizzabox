@@ -2,7 +2,6 @@
 using System;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
-using PizzaBox.Domain.Models.Pizzas;
 using PizzaBox.Client.Singletons;
 //using sc = System.Console; // alias
 

@@ -6,6 +6,7 @@ namespace PizzaBox.Domain.Models.Pizzas
     {
         public Meatlovers()
         {
+            //Crust = new Crust() { name = "Meatlovers" };
             name = "Meatlovers";
         }
     }
