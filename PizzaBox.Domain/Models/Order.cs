@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Domain.Models
@@ -9,5 +9,6 @@ namespace PizzaBox.Domain.Models
         public AStore Store { get; set; }
         public APizza Pizza { get; set; }
         //public double TotalCost { get { return Pizza.Crust.price + Pizza.Size.price + Pizza.Topping.Sum(this => this.price)} }
+        public double TotalCost { get { return Pizza.Crust.price + Pizza.Size.price + Pizza.Toppings.Sum(t => t.price); } }
     }
 }

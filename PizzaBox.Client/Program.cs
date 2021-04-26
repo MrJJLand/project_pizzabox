@@ -1,32 +1,85 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Client.Singletons;
-//using sc = System.Console; // alias
+
 
 namespace project_pizzabox.Client
 {
     public class Program
     {
-        private static readonly StoreSingletons _storeSingleton = StoreSingletons.Instance;
+        private static readonly StoreSingleton _storeSingleton = StoreSingleton.Instance;
+        private static readonly PizzaSingleton _pizzaSingleton = PizzaSingleton.Instance;
         private static void Main()
         {
-            //List<string> stores = new List<string>{"Store 001", "Store 002", "Store 003"}; // explicit
-            var stores = new List<AStore> { new NewYorkStore(), new ChicagoStore() }; // datatype inference
+            Run();
+        }
 
-            for (var x = 0; x < stores.Count; x += 1)
+        private static void Run()
+        {
+            var order = new Order();
+
+            Console.WriteLine("For When You Don't Want to Be Trendy Like Your Friends For All Your Pizza Needs\n                 Welcome to PizzaBox");
+            PrintStoreList();
+
+            order.Customer = new Customer();
+            order.Store = SelectStore();
+            order.Pizza = SelectPizza();
+        }
+
+        private static void PrintOrder(APizza pizza)
+        {
+            Console.WriteLine($"Your order is: {pizza}");
+        }
+
+        private static void PrintStoreList()
+        {
+            var index = 1;
+
+            foreach (var item in _storeSingleton.Stores)
             {
-                Console.WriteLine(stores[x]);
+                Console.WriteLine($"{index++} - {item}");
+            }
+        }
+
+        private static void PrintPizzaList()
+        {
+            var index = 1;
+
+            foreach (var item in _pizzaSingleton.Pizzas)
+            {
+                Console.WriteLine($"{index++} - {item}");
+            }
+        }
+
+        private static AStore SelectStore()
+        {
+            var check = int.TryParse(Console.ReadLine(), out int input);
+
+            if (!check)
+            {
+                return null;
             }
 
-            Console.Write("Pick the Number of a Store: ");
-            string input = System.Console.ReadLine();
-            int entry = int.Parse(input);
-            entry = entry - 1;
+            PrintPizzaList();
 
-            Console.WriteLine("Your store is " + stores[entry]);
-
+            return _storeSingleton.Stores[input - 1];
         }
+
+        private static APizza SelectPizza()
+        {
+            var check = int.TryParse(Console.ReadLine(), out int input);
+            var pizza = _pizzaSingleton.Pizzas[input - 1];
+
+            if (!check)
+            {
+                return null;
+            }
+
+            PrintOrder(pizza);
+
+            return pizza;
+        }
+
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
 
@@ -6,26 +5,22 @@ namespace PizzaBox.Domain.Models.Pizzas
 {
     public class Custom : APizza
     {
-        protected override void AddCrust()
+        public override void AddCrust(Crust crust = null)
         {
-            //AddCrust = new Crust() { name = "Original" };
+            Crust = crust ?? new Crust() { name = "Original" };
         }
-        protected override void AddSize()
+        public override void AddSize(Size size = null)
         {
-            //Size = new Size() { name = "Medium" };
+            Size = size;
         }
-        // protected override void AddToppings()
-        // {
-        //     Toppings = new List<Topping>()
-        //     {
-        //         new Topping() {name = "Mozzerella"};
-        //         new Topping() { name = "Marinara" };
-        //     }
-        // }
-        public Custom()
+        public override void AddToppings(params Topping[] toppings)
         {
-            name = "Custom";
-            Factory();
+            Toppings = new List<Topping>()
+            {
+                new Topping() {name = "Mozzerella"},
+                new Topping() { name = "Marinara" }
+            };
         }
     }
 }
+
