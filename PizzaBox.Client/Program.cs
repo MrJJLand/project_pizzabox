@@ -42,19 +42,26 @@ namespace project_pizzabox.Client
 
         private static void PrintOrder(APizza pizza)
         {
-            Console.WriteLine($"Your order is: {pizza}");
+            Console.WriteLine($"Your order is: {pizza}\nYour order will cost $" + pizza.price);
         }
         private static void PrintListToScreen(IEnumerable<object> items)
         {
-            Console.WriteLine("Test 1");
             var index = 1;
-            Console.WriteLine("Test 2");
             foreach (var item in items)
             {
-                Console.WriteLine("Test 3...");
                 Console.WriteLine($"{index++} - {item}");
             }
         }
+
+        // private static void PrintOrderList(List<Order> orders)
+        // {
+        //     var index = 0;
+
+        //     foreach (var order in orders)
+        //     {
+        //         Console.WriteLine($"{index++} - {order}");
+        //     }
+        // }
         private static AStore SelectStore()
         {
             var check = int.TryParse(Console.ReadLine(), out int input);

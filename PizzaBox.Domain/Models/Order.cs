@@ -9,7 +9,6 @@ namespace PizzaBox.Domain.Models
         public Customer Customer { get; set; }
         public AStore Store { get; set; }
         public APizza Pizza { get; set; }
-        //public double TotalCost { get { return Pizza.Crust.price + Pizza.Size.price + Pizza.Topping.Sum(this => this.price)} }
         public double TotalCost { get { return Pizza.Crust.price + Pizza.Size.price + Pizza.Toppings.Sum(t => t.price); } }
     }
 }

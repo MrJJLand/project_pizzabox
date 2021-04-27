@@ -14,10 +14,10 @@ namespace PizzaBox.Domain.Abstracts
     public abstract class APizza : AModel
     {
         public string name = "";
-        public Crust Crust { get; set; }
-        public Size Size { get; set; }
-        public List<Topping> Toppings { get; set; }
-        protected double price { get; set; }
+        public Crust Crust; //{ get; set; }
+        public Size Size; //{ get; set; }
+        public List<Topping> Toppings; //{ get; set; }
+        public double price { get; set; }
 
         protected APizza()
         {

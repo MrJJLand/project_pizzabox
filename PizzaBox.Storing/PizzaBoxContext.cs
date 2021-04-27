@@ -46,13 +46,10 @@ namespace PizzaBox.Storing
             builder.Entity<Hawaiian>().HasBaseType<APizza>();
 
             builder.Entity<Crust>().HasKey(e => e.EntityID);
-            builder.Entity<Crust>().HasMany<APizza>().WithOne();
 
             builder.Entity<Size>().HasKey(e => e.EntityID);
-            builder.Entity<Size>().HasMany<APizza>().WithOne();
 
             builder.Entity<Topping>().HasKey(e => e.EntityID);
-            builder.Entity<APizza>().HasMany<Topping>();
 
             builder.Entity<Order>().HasKey(e => e.EntityID);
             builder.Entity<APizza>().HasMany<Order>().WithOne(o => o.Pizza);
@@ -149,10 +146,22 @@ namespace PizzaBox.Storing
                 new Order() {EntityID = 2}
             });
 
-            // builder.Entity<APizza>().HasData(new Custom[]
-            // {
-            //     new Custom() {EntityID = 1, name = "Custom"}
-            // });
+            builder.Entity<Custom>().HasData(new Custom[]
+            {
+                new Custom() {EntityID = 1, name = "Custom", price = 0},
+            });
+            builder.Entity<Hawaiian>().HasData(new Hawaiian[]
+            {
+                new Hawaiian() {EntityID = 2, name = "Hawaiian", price = 15},
+            });
+            builder.Entity<Meatlovers>().HasData(new Meatlovers[]
+            {
+                new Meatlovers() {EntityID = 3, name = "Meatlovers", price = 15},
+            });
+            builder.Entity<Veggie>().HasData(new Veggie[]
+            {
+                new Veggie() {EntityID = 4, name = "Veggie", price = 15}
+            });
         }
     }
 }

@@ -5,11 +5,11 @@ namespace PizzaBox.Domain.Models.Pizzas
 {
     public class Custom : APizza
     {
-        public override void AddCrust(Crust crust = null)
+        public override void AddCrust(Crust crust)
         {
             Crust = new Crust() { name = "Original" };
         }
-        public override void AddSize(Size size = null)
+        public override void AddSize(Size size)
         {
             Size = new Size() { name = "Large" };
         }
@@ -18,7 +18,7 @@ namespace PizzaBox.Domain.Models.Pizzas
             Toppings = new List<Topping>()
             {
                 new Topping() {name = "Mozzerella"},
-                new Topping() { name = "Marinara" }
+                new Topping() {name = "Marinara" }
             };
         }
     }
