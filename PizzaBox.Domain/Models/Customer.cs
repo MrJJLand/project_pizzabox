@@ -6,8 +6,6 @@ namespace PizzaBox.Domain.Models
     {
         public string name { get; set; }
 
-        public long CustomerID { get; set; }
-
         public override string ToString()
         {
             return $"{name}";

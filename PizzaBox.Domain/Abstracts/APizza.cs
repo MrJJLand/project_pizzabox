@@ -13,14 +13,10 @@ namespace PizzaBox.Domain.Abstracts
     [XmlInclude(typeof(Hawaiian))]
     public abstract class APizza : AModel
     {
+        public string name = "";
         public Crust Crust { get; set; }
         public Size Size { get; set; }
         public List<Topping> Toppings { get; set; }
-        public long SizeEntityID { get; set; }
-
-        protected const int top_max = 5, top_min = 2;
-        protected double crust_price = 0.0, size_price = 0.0, toppings_price = 0.0;
-        //double price = crust_price + size_price + toppings_price;
         protected double price { get; set; }
 
         protected APizza()

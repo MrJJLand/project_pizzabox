@@ -7,11 +7,11 @@ namespace PizzaBox.Domain.Models.Pizzas
     {
         public override void AddCrust(Crust crust = null)
         {
-            Crust = crust ?? new Crust() { name = "Original" };
+            Crust = new Crust() { name = "Original" };
         }
         public override void AddSize(Size size = null)
         {
-            Size = size;
+            Size = new Size() { name = "Large" };
         }
         public override void AddToppings(params Topping[] toppings)
         {

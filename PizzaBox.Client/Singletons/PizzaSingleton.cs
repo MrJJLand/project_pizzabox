@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using PizzaBox.Domain.Abstracts;
-using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Models.Pizzas;
 using PizzaBox.Storing;
 using PizzaBox.Storing.Repositories;
@@ -14,40 +13,22 @@ namespace PizzaBox.Client.Singletons
     {
         private const string _path = @"data/pizza.xml";
         private readonly FileRepository _fr = new FileRepository();
-        private readonly PizzaBoxContext _db = new PizzaBoxContext();
+        private readonly PizzaBoxContext _db;
         private static PizzaSingleton _instance;
+        public List<APizza> Pizzas { get; set; }
 
-
-        public List<APizza> Pizzas { get; }
-        public static List<APizza> pizzas = new List<APizza>
+        public static PizzaSingleton Instance(PizzaBoxContext context)
         {
-            new Custom(),
-            new Meatlovers(),
-            new Veggie(),
-            new Hawaiian()
-        };
-
-        public static PizzaSingleton Instance
-        {
-            get
+            if (_instance == null)
             {
-                if (_instance == null)
-                {
-                    _instance = new PizzaSingleton();
-                }
-                return _instance;
+                _instance = new PizzaSingleton(context);
             }
+            return _instance;
         }
 
-        private PizzaSingleton()
+        private PizzaSingleton(PizzaBoxContext context)
         {
-            var cp = new Custom();
-            cp.Size = _db.Sizes.FirstOrDefault(s => s.name == "Medium");
-
-            _db.Add(cp);
-            // _db.Pizzas.AddRange(_fr.ReadFromFile<List<APizza>>(_path));
-            _db.SaveChanges();
-            //Pizzas = _fileRepository.ReadFromFile<List<APizza>>(_path);
+            _db = context;
             Pizzas = _db.Pizzas.ToList();
         }
     }
