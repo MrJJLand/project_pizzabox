@@ -6,6 +6,7 @@ using PizzaBox.Storing.Repositories;
 using PizzaBox.Storing;
 using System.Linq;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace project_pizzabox.Client
 {
@@ -19,7 +20,7 @@ namespace project_pizzabox.Client
 
         private static void Main()
         {
-            Console.WriteLine("For When You Don't Want to Be Trendy Like Your Friends For All Your Pizza Needs\n                 Welcome to PizzaBox");
+            Console.WriteLine("For When You Don't Want to Be Trendy Like Your Friends For All Your Pizza Needs\n\t\t\t*********************\n\t\t\t|Welcome to PizzaBox|\n\t\t\t*********************");
             Run();
         }
 
@@ -43,14 +44,13 @@ namespace project_pizzabox.Client
                 {
                     runner = false;
                     Console.WriteLine("Thank You, Have a Great Day");
-                    return;
+                    End();
                 }
                 else
                 {
                     Console.WriteLine("That is not a valid option. Try Again");
                 }
             }
-            return;
         }
 
         private static void StoreMenu()
@@ -203,6 +203,11 @@ namespace project_pizzabox.Client
             PrintListToScreen(_storeSingleton.Stores);
 
             return customer;
+        }
+
+        public static void End()
+        {
+            Environment.Exit(-1);
         }
 
     }
