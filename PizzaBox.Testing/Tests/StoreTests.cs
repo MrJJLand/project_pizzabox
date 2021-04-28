@@ -26,7 +26,7 @@ namespace PizzaBox.Testing.Tests
             //actual = "dotnet"; // this should not happen
 
             // assert
-            Assert.True(actual == "ChicagoStore");
+            Assert.True(actual == "Chicago Store");
             Assert.True(sut.ToString() == actual);
 
         }
@@ -36,7 +36,7 @@ namespace PizzaBox.Testing.Tests
         {
             var sut = new NewYorkStore();
 
-            Assert.True(sut.name.Equals("NewYorkStore"));
+            Assert.True(sut.name.Equals("NewYork Store"));
         }
 
         [Theory]

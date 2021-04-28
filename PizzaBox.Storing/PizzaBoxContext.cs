@@ -148,19 +148,19 @@ namespace PizzaBox.Storing
 
             builder.Entity<Custom>().HasData(new Custom[]
             {
-                new Custom() {EntityID = 1, name = "Custom", price = 0},
+                new Custom() {EntityID = 1, name = "Custom"},
             });
             builder.Entity<Hawaiian>().HasData(new Hawaiian[]
             {
-                new Hawaiian() {EntityID = 2, name = "Hawaiian", price = 15},
+                new Hawaiian() {EntityID = 2, name = "Hawaiian"},
             });
             builder.Entity<Meatlovers>().HasData(new Meatlovers[]
             {
-                new Meatlovers() {EntityID = 3, name = "Meatlovers", price = 15},
+                new Meatlovers() {EntityID = 3, name = "Meatlovers"},
             });
             builder.Entity<Veggie>().HasData(new Veggie[]
             {
-                new Veggie() {EntityID = 4, name = "Veggie", price = 15}
+                new Veggie() {EntityID = 4, name = "Veggie"}
             });
         }
     }

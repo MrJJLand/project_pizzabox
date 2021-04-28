@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PizzaBox.Client.Singletons;
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Models.Pizzas;
 using Xunit;
@@ -22,10 +23,6 @@ namespace PizzaBox.Testing.Tests
             new object[] {new Veggie() },
             new object[] {new Hawaiian() }
         };
-
-        public static PizzaSingleton _pizzaInstance;
-        public static StoreSingleton _storeInstance;
-        public static CustomerSingleton _customerInstance;
 
         [Fact]
         public void TestChicagoStore()
@@ -111,55 +108,57 @@ namespace PizzaBox.Testing.Tests
 
         [Theory]
         [InlineData(1)]
-        [InlineData(3)]
-        // [InlineData(1, "Michael", "Mama Mia's", "Pepperoni", 10)]
-        // [InlineData(2, "Aralith", "Luigi's", "A-a-Spicy-a-Meatabll", 15)]
-        public void TestOrder(long EntityID)
+        [InlineData(2)]
+        public void TestOrderCreation(long EntityID)
         {
             var tester = new Order();
             tester.EntityID = EntityID;
-            // tester.Customer.name = name;
-            // tester.Customer.EntityID = EntityID;
-            // tester.Store.name = shop;
-            // tester.Store.EntityID = EntityID;
-            // tester.Pizza.name = piz;
-            // tester.Pizza.price = price;
-            // tester.Pizza.EntityID = EntityID;
-            Assert.NotNull(tester.EntityID);
-            // Assert.NotNull(tester.Customer.EntityID);
-            // Assert.NotNull(tester.Store.EntityID);
-            // Assert.NotNull(tester.Pizza.EntityID);
-            // Assert.NotNull(tester.Customer.name);
-            // Assert.NotNull(tester.Store.name);
-            // Assert.NotNull(tester.Pizza.name);
-            // Assert.NotNull(tester.Pizza.price);
+            Assert.True(tester.EntityID != 0);
         }
 
-        [Fact]
-        public void TestCustom()
+        [Theory]
+        [InlineData(1, "Michael")]
+        [InlineData(2, "Aralith")]
+        public void TestOrderCustomer(long EntityID, string name)
         {
-            var tester = new Custom();
-            var newCrust = new Crust();
-            var newSize = new Size();
-            var newTopping = new Topping();
-            tester.AddCrust(newCrust);
-            tester.AddSize(newSize);
-            tester.AddToppings(newTopping);
-            Assert.NotNull(tester.Crust);
-            Assert.NotNull(tester.Size);
-            Assert.NotNull(tester.Toppings);
+            var tester = new Order();
+            tester.EntityID = EntityID;
+            tester.Customer = new Customer();
+            tester.Customer.EntityID = EntityID;
+            tester.Customer.name = name;
+            Assert.NotNull(tester.Customer.ToString());
+            Assert.True(tester.Customer.EntityID != 0);
+        }
+
+        [Theory]
+        [InlineData(1, "Mama Mia's")]
+        [InlineData(2, "Luigi's")]
+        public void TestOrderStore(long EntityID, string name)
+        {
+            var tester = new Order();
+            tester.EntityID = EntityID;
+            tester.Store = new ChicagoStore();
+            tester.Store.EntityID = EntityID;
+            tester.Store.name = name;
+            Assert.NotNull(tester.Store.ToString());
+            Assert.True(tester.Store.EntityID != 0);
+        }
+
+        [Theory]
+        [InlineData(1, "That'sa One a-Spicy a-Meat-a-Ball")]
+        [InlineData(2, "Hawaiian")]
+        public void TestOrderPizza(long EntityID, string name)
+        {
+            var tester = new Order();
+            tester.EntityID = EntityID;
+            tester.Pizza = new Custom();
+            Assert.True(tester.Pizza.pizzaPrice != 0);
         }
 
         [Fact]
         public void TestMeat()
         {
             var tester = new Meatlovers();
-            var newCrust = new Crust();
-            var newSize = new Size();
-            var newTopping = new Topping();
-            tester.AddCrust(newCrust);
-            tester.AddSize(newSize);
-            tester.AddToppings(newTopping);
             Assert.NotNull(tester.Crust);
             Assert.NotNull(tester.Size);
             Assert.NotNull(tester.Toppings);

@@ -1,6 +1,7 @@
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Models.Pizzas;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -17,7 +18,7 @@ namespace PizzaBox.Domain.Abstracts
         public Crust Crust; //{ get; set; }
         public Size Size; //{ get; set; }
         public List<Topping> Toppings; //{ get; set; }
-        public double price { get; set; }
+        public double pizzaPrice { get { return Crust.price + Size.price + Toppings.Sum(t => t.price); } }
 
         protected APizza()
         {
