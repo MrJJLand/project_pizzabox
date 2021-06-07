@@ -12,9 +12,9 @@ namespace PizzaBox.Storing
         public DbSet<AStore> Stores { get; set; } //implicit serialization, implicit casting
         public DbSet<APizza> Pizzas { get; set; }
         public DbSet<Customer> Customers { get; set; } // These are the File Writer, Reader and Serializer
-        public DbSet<Size> Sizes { get; set; }
-        public DbSet<Topping> Toppings { get; set; }
-        public DbSet<Crust> Crusts { get; set; }
+        public DbSet<Size> Sizes { get; }
+        public DbSet<Topping> Toppings { get; }
+        public DbSet<Crust> Crusts { get; }
         public DbSet<Order> Orders { get; set; }
 
         public PizzaBoxContext()
@@ -46,10 +46,13 @@ namespace PizzaBox.Storing
             builder.Entity<Hawaiian>().HasBaseType<APizza>();
 
             builder.Entity<Crust>().HasKey(e => e.EntityID);
+            builder.Entity<Crust>().HasMany<APizza>().WithOne();
 
             builder.Entity<Size>().HasKey(e => e.EntityID);
+            builder.Entity<Size>().HasMany<APizza>().WithOne();
 
             builder.Entity<Topping>().HasKey(e => e.EntityID);
+            builder.Entity<Topping>().HasMany<APizza>();
 
             builder.Entity<Order>().HasKey(e => e.EntityID);
             builder.Entity<APizza>().HasMany<Order>().WithOne(o => o.Pizza);

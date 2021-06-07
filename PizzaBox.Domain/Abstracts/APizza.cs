@@ -8,16 +8,16 @@ using System.Xml.Serialization;
 namespace PizzaBox.Domain.Abstracts
 {
 
-    [XmlInclude(typeof(Custom))]
-    [XmlInclude(typeof(Meatlovers))]
-    [XmlInclude(typeof(Veggie))]
-    [XmlInclude(typeof(Hawaiian))]
+    // [XmlInclude(typeof(Custom))]
+    // [XmlInclude(typeof(Meatlovers))]
+    // [XmlInclude(typeof(Veggie))]
+    // [XmlInclude(typeof(Hawaiian))]
     public abstract class APizza : AModel
     {
         public string name = "";
-        public Crust Crust; //{ get; set; }
-        public Size Size; //{ get; set; }
-        public List<Topping> Toppings; //{ get; set; }
+        public Crust Crust;
+        public Size Size;
+        public List<Topping> Toppings;
         public double pizzaPrice { get { return Crust.price + Size.price + Toppings.Sum(t => t.price); } }
 
         protected APizza()

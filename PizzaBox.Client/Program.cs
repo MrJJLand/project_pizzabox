@@ -6,7 +6,6 @@ using PizzaBox.Storing.Repositories;
 using PizzaBox.Storing;
 using System.Linq;
 using System.Collections.Generic;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace project_pizzabox.Client
 {
